@@ -18,6 +18,7 @@ import { Eye, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DeleteHomeBtn from '@/components/DeleteHomeBtn';
 import Toast from '@/components/common/Toast';
+import Link from 'next/link';
 
 
 export default async function Dashboard() {
@@ -62,13 +63,16 @@ export default async function Dashboard() {
                                     <TableCell className="text-right  space-x-2">
                                        
                                           <DeleteHomeBtn id={item.id}/>
-                                            <Button size='sm' className='bg-green-300'
+                                          <Link href={`/home/${item.id}`}>
+                                          <Button size='sm' className='bg-green-300'
                                                 style={{
                                                     padding: '5px 10px',
                                                     fontSize: '12px'
                                                 }}>
                                                 <Eye width={20} height={20} />
                                             </Button>
+                                          </Link>
+                                            
                                        
                                     </TableCell>
                                 </TableRow>
