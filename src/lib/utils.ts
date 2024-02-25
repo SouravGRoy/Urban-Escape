@@ -21,3 +21,7 @@ export function bytesToMb(bytes:number):number {
 export function getUEImageURL(path:string):string{
 return `${ENV.SUPABASE_URL}/storage/v1/object/public/${ENV.UE_BUCKET}/${path}`
 }
+
+export function capitalizeFirstLetter(data:string):string {
+  return `${data.charAt(0).toUpperCase()}${data.slice(1)}`
+}
