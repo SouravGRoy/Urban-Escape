@@ -15,8 +15,9 @@ type HomeType ={
     city:any;
     state:any;
     price:any;
+    description:any;
     image:any;
     users:{
-        name:JSON;
+        name:string;
     }
 };
