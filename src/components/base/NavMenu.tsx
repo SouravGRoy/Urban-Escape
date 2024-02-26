@@ -8,6 +8,7 @@ import { MenuIcon } from 'lucide-react'
 import LoginModal from '../auth/LoginModal'
 import SignupModal from '../auth/SignupModal'
 import SignOutBtn from '../common/SignOutBtn'
+import Link from 'next/link'
   
 
 export default function NavMenu({session}:{session:object | undefined}){
@@ -20,7 +21,10 @@ export default function NavMenu({session}:{session:object | undefined}){
         <ul>
           {session && (
             <>
-              <li className='hover:bg-gray-200 rounded-md p-2 cursor-pointer'>Dashboard</li>
+            <Link href="/dashboard">
+            <li className='hover:bg-gray-200 rounded-md p-2 cursor-pointer'>Dashboard</li>
+            </Link>
+             
               <SignOutBtn />
             </> 
           )}

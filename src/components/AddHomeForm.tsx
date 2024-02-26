@@ -131,7 +131,7 @@ export default function AddHomeForm() {
             </div>
             <div className='mt-5'>
                 <Label htmlFor='image'>Image</Label>
-                <Input id="image" type='file' onChange={handleImageChange}/>
+                <Input id="image" type='file' multiple onChange={handleImageChange}/>
                 <span className='text-red-500'>{errors?.image?.message}</span>
             </div>
         </div>
