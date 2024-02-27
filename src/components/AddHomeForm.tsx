@@ -80,7 +80,7 @@ export default function AddHomeForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
         <div className='grid grid-cols-1 gap-2 lg:grid-cols-2'>
-            <div className='mt-5'>
+            <div className='mt-2'>
                 <Label htmlFor='title'>Title</Label>
                 <Input
                  id="title"
@@ -88,7 +88,7 @@ export default function AddHomeForm() {
                  {...register("title")}/>
                 <span className='text-red-500'>{errors?.title?.message}</span>
             </div>
-            <div className='mt-5'>
+            <div className='mt-2'>
                 <Label htmlFor='country'>Countries</Label>
                 <select 
                 className='outline-brand h-10 px-3 py-2 rounded-md w-full border' 
@@ -102,7 +102,7 @@ export default function AddHomeForm() {
                 </select>
                 <span className='text-red-500'>{errors?.country?.message}</span>
             </div>
-            <div className='mt-5'>
+            <div className='mt-2'>
                 <Label htmlFor='state'>State</Label>
                 <Input 
                 id="state" 
@@ -111,7 +111,7 @@ export default function AddHomeForm() {
                 />
                 <span className='text-red-500'>{errors?.state?.message}</span>
             </div>
-            <div className='mt-5'>
+            <div className='mt-2'>
                 <Label htmlFor='city'>City</Label>
                 <Input
                  id="city" 
@@ -120,7 +120,7 @@ export default function AddHomeForm() {
                  />
                 <span className='text-red-500'>{errors?.city?.message}</span>
             </div>
-            <div className='mt-5'>
+            <div className='mt-2'>
                 <Label htmlFor='price'>Price</Label>
                 <Input 
                 id="price" 
@@ -129,13 +129,14 @@ export default function AddHomeForm() {
                 />
                 <span className='text-red-500'>{errors?.price?.message}</span>
             </div>
-            <div className='mt-5'>
+            {/* Images are added from here */}
+            <div className='mt-2'>
                 <Label htmlFor='image'>Image</Label>
                 <Input id="image" type='file' multiple onChange={handleImageChange}/>
                 <span className='text-red-500'>{errors?.image?.message}</span>
             </div>
         </div>
-        <div className='mt-5'>
+        <div className='mt-2'>
                 <Label htmlFor='Description'>Description</Label>
               
                 <ReactQuill 
@@ -147,7 +148,7 @@ export default function AddHomeForm() {
                 
                 <span className='text-red-500'>{errors?.description?.message}</span>
             </div>
-            <div className='mt-5'>
+            <div className='mt-2'>
             <Label htmlFor='categories'>Categories</Label>
             <div className=' grid grid-cols-2 mt-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
              {categories.map((item) => 
@@ -169,7 +170,7 @@ export default function AddHomeForm() {
             </div>
             <span className='text-red-500'>{errors?.categories?.message}</span>
             </div>    
-            <Button className="bg-brand w-full mt-5" disabled={loading}>{loading ? "Processing.. ⚙︎" : "Submit"}</Button>      
+            <Button className="bg-brand w-full mt-5 mb-5" disabled={loading}>{loading ? "Processing.. ⚙︎" : "Submit"}</Button>      
     </form>
   )
 }
