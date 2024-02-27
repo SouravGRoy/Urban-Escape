@@ -2,32 +2,31 @@
 import React,{ useState } from 'react'
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { addDays } from 'date-fns';
-import { DateRangePicker } from 'react-date-range';
+import { DateRangePicker,DateRange } from 'react-date-range';
 
 
-export default function DatePicker() {
+export default function DatePicker({state,dateChangeCallback}:{state:any,dateChangeCallback:(data:any)=>void}) {
 
-const [state,setState] = useState([
-    {
-    startDate:new Date(),
-    endDate:addDays(new Date(),7),
-    key:'selection'
-},
-
-])
-
-const handleDateChange=(data:any)=>{
-    setState([data?.selection])
-}
   return (
     <div>
+       <div className='hidden md:block'>
       <DateRangePicker
-      onChange={handleDateChange}
+      onChange={dateChangeCallback}
       moveRangeOnFirstSelection={false}
       months={1}
       ranges={state}
       />
+      </div>
+      
+      <div className='md:hidden'>
+      <DateRange
+      onChange={dateChangeCallback}
+      moveRangeOnFirstSelection={false}
+      months={1}
+      ranges={state}
+      />
+      </div>
+
     </div>
   )
 }
