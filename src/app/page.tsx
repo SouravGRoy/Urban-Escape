@@ -5,9 +5,18 @@ import Toast from "@/components/common/Toast";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers"; 
 
-export default async function Home() {
+export default async function Home({searchParams}:{searchParams?:{[key:string]:string}}) {
  const supabase = createServerComponentClient({cookies})
-const {data:homes,error} = await supabase.from("homes").select("id,title,image,country,city,price,users(metadata->name)")
+const query =  supabase
+.from("homes").select("id,title,image,country,city,price,users(metadata->name)")
+if(searchParams?.country){
+  query.ilike('country',`%${searchParams?.country}%`)
+}
+if(searchParams?.category){
+  query.contains('categories',[searchParams?.category])
+}
+const {data:homes,error} = await query 
+
 
   return (
     <div>
@@ -17,6 +26,8 @@ const {data:homes,error} = await supabase.from("homes").select("id,title,image,c
 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 px-10">
 {homes && homes.length > 0 && homes.map((item) => <HomeCard home={item} key={item.id}/>)}
 </div>
+{homes && homes.length <= 0 && <h1 className="text-brand font-bold mt-5 text-2xl text-center">No UE Found</h1>
+}
     </div>
   );
 }
