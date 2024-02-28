@@ -1,5 +1,5 @@
 "use client"
-import React,{useState} from 'react'
+import React,{useState ,useEffect} from 'react'
 import {
     Sheet,
     SheetContent,
@@ -13,12 +13,13 @@ import MobileNav from '../base/MobileNav'
 import SearchSheetNav from './SearchSheetNav'
 import DatePicker from './DatePicker'
 import { Button } from '../ui/button'
-import { addDays,format, set } from 'date-fns';
-import { useRouter } from 'next/navigation'
+import { addDays,format, differenceInDays,parse } from 'date-fns';
+import { useRouter,useSearchParams } from 'next/navigation'
 
 
 export default function SearchSheet({session}:{session:any}) {
     const [open, setOpen] = useState(false)
+    const params = useSearchParams()
     const [search,setSearch] = useState<string>("")
     const router = useRouter()
     const [dateState,setDateState] = useState([
@@ -28,9 +29,35 @@ export default function SearchSheet({session}:{session:any}) {
         key:'selection'
     }, 
     ])
+    const [searchedParams,setSearchedParams] = useState({
+      country:"",
+      days:"",
+    })
+    
     const handleDateChange=(data:any)=>{
         setDateState([data?.selection])
-    }   
+    } 
+    useEffect(() => {
+      const endDateParam = params?.get("endDate");
+      const startDateParam = params?.get("startDate");
+    
+      if (endDateParam && startDateParam) {
+        const difference = differenceInDays(
+          parse(endDateParam, "yyyy-MM-dd", new Date()),
+          parse(startDateParam, "yyyy-MM-dd", new Date())
+        );
+    
+        if (difference) {
+          setSearchedParams({
+            ...searchedParams,
+            country: params.get("country") || "",
+            days: `${difference} days`,
+          });
+        }
+      }
+    }, [params]);
+    
+    
 const handleSubmit = ()=>{
    const startDate = format(dateState[0].startDate,"yyyy-MM-dd")
    const endDate = format(dateState[0].endDate, "yyyy-MM-dd")
@@ -44,9 +71,9 @@ const handleSubmit = ()=>{
   <SheetTrigger asChild>
   <div className='w-full md:w-auto cursor-pointer' onClick={()=>setOpen(true)}>
       <div className='hidden md:flex items-center space-x-2 border rounded-3xl p-2 hover:shadow-lg transition duration-300'>
-        <span className="text-sm pl-2">Anywhere</span>
+        <span className="text-sm pl-2">{searchedParams.country !== "" ?searchedParams.country:"Anywhere"}</span>
         <span className='text-gray-400'>|</span>
-        <span className="text-sm pl-2">Any week</span>
+        <span className="text-sm pl-2">{searchedParams.days !== "" ?searchedParams.days:"Any week"}</span>
         <span className='text-gray-400'>|</span>
         <span className="text-sm pr-2 text-gray-400">Add guest</span>
         <span className='bg-brand text-white rounded-full p-2'>
