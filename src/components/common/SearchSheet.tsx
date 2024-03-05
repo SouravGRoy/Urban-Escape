@@ -30,13 +30,14 @@ export default function SearchSheet({session}:{session:any}) {
     }, 
     ])
     const [searchedParams,setSearchedParams] = useState({
-      country:"",
+      country:"Anywhere",
       days:"",
-    })
+    });
     
     const handleDateChange=(data:any)=>{
         setDateState([data?.selection])
     } 
+    // Updated this section and also added the search parameter change when searched the specific country and time
     useEffect(() => {
       const endDateParam = params?.get("endDate");
       const startDateParam = params?.get("startDate");
@@ -48,14 +49,17 @@ export default function SearchSheet({session}:{session:any}) {
         );
     
         if (difference) {
-          setSearchedParams({
-            ...searchedParams,
-            country: params.get("country") || "",
+          setSearchedParams((prevSearchedParams) => ({
+            ...prevSearchedParams,
+            country: params.get("country") || "Anywhere",
             days: `${difference} days`,
-          });
+          }));
         }
       }
     }, [params]);
+    
+    
+   
     
     
 const handleSubmit = ()=>{

@@ -2,16 +2,23 @@ import AddHomeForm from "@/components/AddHomeForm";
 import Navbar from "@/components/base/Navbar";
 import Counter from "@/components/common/Counter";
 import { generateRandomNum } from "@/lib/utils";
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 
 export default function AddHome() {
   return (
     <div>
-      <ToastContainer/>
-      <Navbar />
+      <ToastContainer />
+
+      <Suspense fallback={
+        <div>
+          loading ...
+        </div>}>
+        <Navbar />
+      </Suspense>
+
       <div className="container mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 place-items-center md:gap-2 gap-4 mt-12">
           <div>
@@ -38,11 +45,11 @@ export default function AddHome() {
                 alt="home"
                 className="rounded-2xl object-cover"
               />
-             
+
             </div>
           </div>
           <div>
-          <AddHomeForm/>
+            <AddHomeForm />
           </div>
         </div>
       </div>

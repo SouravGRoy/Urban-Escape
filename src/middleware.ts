@@ -1,26 +1,19 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { NextResponse, NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
+import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
 
-  try {
-    const supabase = createServerComponentClient({ cookies });
-    // Fetch and check user data
-    const { data: session } = await supabase.auth.getSession();
-    // Handle authentication state
-    if (!session?.session?.user) {
-      const url = new URL("/?error=Please login first to access this route", request.url);
-      return NextResponse.redirect(url);
-    }
-    // Access authenticated user data if needed
-    const user = session?.session.user; // Use user data for further logic if required
-    // Additional logic for authenticated users (optional)
-    // ...
-  } catch (error) {
-    console.error('Error in middleware:', error);
-  }
-  return NextResponse.next();
+export async function middleware(req: NextRequest) {
+  const url = new URL(req.url);
+  const res = NextResponse.next();
+
+  const supabase = createMiddlewareClient({ req, res });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return NextResponse.redirect(new URL("/?error=Please login first to access this route", req.url));
+  return res;
 }
 
 export const config = {

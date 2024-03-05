@@ -1,23 +1,25 @@
-type CategoriesType={
-    name:string;
-    icon:string;
+import { Icons } from "@/components/icons/Icon";
+
+export type CategoriesType = {
+    name: string;
+    icon: keyof typeof Icons;
 }
 
-type CountriesType={
-    label:string;
-    value:string;
+export type CountriesType = {
+    label: string;
+    value: string;
 }
 
-type HomeType ={
-    id:any;  
-    title:any;
-    country:any;
-    city:any;
-    state:any;
-    price:any;
-    description:any;
-    image:any;
-    users:{
-        name:string;
+export type HomeType = {
+    id: any;
+    title: any;
+    country: any;
+    city: any;
+    state: any;
+    price: any;
+    description: any;
+    image: any;
+    users: {
+        name: string;
     }
 };

@@ -7,7 +7,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       colors: {
-        brand:"#A6D6D5",
+        brand: "#A6D6D5",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -75,7 +75,6 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
 
