@@ -14,7 +14,10 @@ interface PageProps {
 }
 
 export default async function Homefetch({ searchParams }: PageProps) {
-    const supabase = createServerComponentClient({ cookies })
+    const cookieStore = cookies();
+	const supabase = createServerComponentClient({
+		cookies: () => cookieStore,
+	});
     const query = supabase
         .from("homes").select("id,title,image,country,city,price,users(metadata->name)")
     if (searchParams?.country) {
