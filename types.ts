@@ -18,7 +18,7 @@ export type HomeType = {
     state: any;
     price: any;
     description: any;
-    image: any;
+    image: string;
     users: {
         name: string;
     }
