@@ -24,7 +24,7 @@ export default async function Navbar() {
 			<div className="flex items-center space-x-4 ">
 				<Link href="/addHome">
 					{" "}
-					<span className="text-sm pl-2 hidden md:flex items-center space-x-4">
+					<span className="hover:bg-green-100  border border-green-100 rounded-full p-2 cursor-pointer text-sm pl-2 hidden md:flex items-center space-x-4">
 						Add your Home
 					</span>
 				</Link>
