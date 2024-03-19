@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import { categories } from '../../../config/categories';
-import Image from 'next/image';
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Carousel,
@@ -59,7 +58,7 @@ export function Categories() {
         <CarouselPrevious />
         <CarouselNext className="hidden md:flex" />
       </Carousel >
-      <div className="flex hidden md:block">
+      <div className="flex hidden lg:block">
         <Filter />
       </div>
     </div>
