@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import Homefetch from "@/components/home/Home-fetch";
+import Loader from "@/components/loader";
 
 interface PageProps {
   searchParams?: {
@@ -10,9 +11,7 @@ interface PageProps {
 export default function Home({ searchParams }: PageProps) {
   return (
     <Suspense fallback={
-      <div>
-        loading ...
-      </div>}>
+      <Loader />}>
       <Homefetch
         searchParams={searchParams}
       />
