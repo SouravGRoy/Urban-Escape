@@ -29,9 +29,9 @@ interface PageProps {
 
 export default async function DashboardFetch({ params }: PageProps) {
   const cookieStore = cookies();
-	const supabase = createServerComponentClient({
-		cookies: () => cookieStore,
-	});
+  const supabase = createServerComponentClient({
+    cookies: () => cookieStore,
+  });
   const user = await supabase.auth.getUser()
   const { data: homes, error } = await supabase.from("homes").select("id,image,title,country,city,state,price,created_at").eq("user_id", user.data.user?.id)
   return (
@@ -62,7 +62,7 @@ export default async function DashboardFetch({ params }: PageProps) {
                   <TableCell>{item.title}</TableCell>
                   <TableCell >
                     <Image
-                      src={getUEImageURL(item.image)}
+                      src={getUEImageURL(JSON.parse(item.image)[0])}
                       className='rounded-full shadow-sm w-12 h-12'
                       width={50}
                       height={50}
