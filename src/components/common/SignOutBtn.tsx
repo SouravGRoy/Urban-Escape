@@ -27,7 +27,7 @@ export default function SignOutBtn() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <li className='hover:bg-gray-200 rounded-md p-2 cursor-pointer'>Logout</li>
+        <li className='hover:bg-gray-200 rounded-md p-2 border border-green-100 cursor-pointer'>Logout</li>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
