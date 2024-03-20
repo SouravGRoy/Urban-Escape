@@ -1,6 +1,15 @@
 import { bytesToMb } from "@/lib/utils";
 import * as yup from "yup"
 
+const MAX_FILE_SIZE = 102400; //100KB
+
+const fileTypes = ['jpg', 'gif', 'png', 'jpeg', 'svg', 'webp'] as const;
+const validFileExtensions = { image: ['jpg', 'gif', 'png', 'jpeg', 'svg', 'webp'] };
+
+function isValidFileType(fileName: string): boolean {
+  return validFileExtensions["image"].indexOf(fileName.split('.')!.pop()!) > -1;
+}
+
 export const homeSchema = yup
   .object({
     title: yup.string().required().min(5).max(50),
@@ -8,20 +17,15 @@ export const homeSchema = yup
     state: yup.string().required().min(5).max(50),
     city: yup.string().required().min(5).max(50),
     price: yup.number().required().typeError("Amount should be number"),
-    description: yup.string().required().min(10).max(20000),
-    categories: yup.mixed<Array<string> | []>()
-    .test("categories" , "Please select at least one category",(data:any)=>{const isValid = data?.length >= 1 
-    return isValid;
-    }),
-    image: yup.mixed().test("image", "Only JPEG , PNG , WEBP images are allowed", (file:any)=>{
-        const isValid = file?.type == "image/jpeg" || file?.type == "image/png" || file?.type == "image/webp"
-        return isValid
-    })
-    .test("imageSize", "Image must be less than 2 MB",(file:any)=>{
-        const isValid = bytesToMb(file?.size) <= 2
-        return isValid
-    }),
+    categories:
+      yup
+        .array()
+        .of(yup.string())
+        .compact()
+        .defined()
+        .min(1, "You have to select at least one item.")
   })
   .required();
 
-  export type AddHomeType = yup.InferType<typeof homeSchema>
+export type AddHomeType = yup.InferType<typeof homeSchema>
+
