@@ -18,39 +18,46 @@ interface Tile {
 export default function HomeCard({ home }: { home: any }) {
   return (
     <>
-      <div className="container mt-2 m-1">
+      <div className="container mt-4 flex justify-center">
         <Carousel
           opts={{
             align: "start",
             loop: true,
           }}
-          className="group transition duration-700 ease-in-out md:w-[250px] w-full"
+          className="group transition duration-700 ease-in-out lg:w-[282px] ax-w-[350px] w-full shadow-lg shadow-cyan-300/40"
         >
-          <CarouselContent className="aspect-w-16 aspect-h-9">
+          <CarouselContent className="aspect-w-16 aspect-h-9 ">
             {parseJSON<string[]>(home.image).map((image, index) => (
-              <CarouselItem className=" w-full md:w-[250px]" key={index}>
+              <CarouselItem className=" w-full px-4" key={index}>
                 <Link
-                  className="z-0 block w-full h-full aspect-square"
+                  className="z-0 w-full h-full aspect-square"
                   href={`/home/${home.id}`}
                 >
-                  <Image
-                    className="h-[280px] w-full rounded-xl object-cover object-center"
-                    width={350} // You might consider removing this as well
-                    height={100}
-                    src={getUEImageURL(image)}
-                    alt={"image"}
-                  />
-                  <div>
-                    <div className="flex md:mt-2 justify-between">
-                      <div>
-                        <p className="font-semibold">
-                          {home.city}, {home.country}
-                        </p>
-                        <p className="font-bold text-gray-400">{home.title}</p>
-                      </div>
+                  <div className="w-[350px] rounded-xl">
+                    <Image
+                      className="h-[267px] w-full object-cover object-center rounded-t-3xl "
+                      width={354}
+                      height={100}
+                      src={getUEImageURL(image)}
+                      alt={"image"}
+                    />
+                  </div>
 
-                      <div className="">
-                        <p className="font-semibold">Rs. {home.price}</p>
+                  <div>
+                    <div className="w-full max-w-[282px] sm:max-w-none">
+                      <div className="flex md:mt-2 px-1 justify-between">
+                        <div>
+                          <p className="font-semibold">
+                            {home.city}, {home.country}
+                          </p>
+                          <p className="font-bold text-gray-400">
+                            {home.title}
+                          </p>
+                        </div>
+
+                        <div className="">
+                          <p className="font-semibold">Rs. {home.price}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -63,23 +70,6 @@ export default function HomeCard({ home }: { home: any }) {
             <CarouselNext className="z-[9999] -right-0 top-1/2 -translate-y-1/2" />
           </div>
         </Carousel>
-
-        {/* <Link className="z-0 block" href={`/home/${home.id}`}>
-          <div>
-            <div className="flex md:mt-2 justify-between">
-              <div id="data" className="">
-                <p className="font-semibold">
-                  {home.city}, {home.country}
-                </p>
-                <p className="font-light text-gray-400">{home.title}</p>
-              </div>
-
-              <div id="com" className="">
-                <p>{home.price}</p>
-              </div>
-            </div>
-          </div>
-        </Link> */}
       </div>
     </>
   );
