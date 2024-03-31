@@ -4,17 +4,14 @@ import Loader from "@/components/loader";
 
 interface PageProps {
   searchParams?: {
-    country: string,
-    category: string,
-  }
+    country: string;
+    category: string;
+  };
 }
 export default function Home({ searchParams }: PageProps) {
   return (
-    <Suspense fallback={
-      <Loader />}>
-      <Homefetch
-        searchParams={searchParams}
-      />
+    <Suspense fallback={<Loader />}>
+      <Homefetch searchParams={searchParams} />
     </Suspense>
-  )
+  );
 }
