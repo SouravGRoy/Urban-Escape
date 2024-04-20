@@ -14,7 +14,7 @@ export default function Brand() {
       />
       {/* image from small screen */}
       <Image
-        src="/mobileLogo-transformed.png"
+        src="/images/mobileLogo-transformed.png"
         alt="logo"
         width={90}
         height={90}

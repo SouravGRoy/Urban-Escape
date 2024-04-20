@@ -18,6 +18,13 @@ const config = {
       },
     },
     extend: {
+      maxWidth: {
+        'custom': '21rem',
+      },
+      padding:{
+'custom':'2rem',
+      },
+
       colors: {
         brand: "#A6D6D5",
         border: "hsl(var(--border))",
