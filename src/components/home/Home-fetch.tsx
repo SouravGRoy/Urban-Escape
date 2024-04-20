@@ -35,7 +35,7 @@ export default async function Homefetch({ searchParams }: PageProps) {
       <Navbar />
       <Categories />
       <hr className="h-px mb-1 bg-gray-100 border-0 dark:bg-gray-500"></hr>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 px-5">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-5">
         {homes &&
           homes.length > 0 &&
           homes.map((item) => <HomeCard home={item} key={item.id} />)}
