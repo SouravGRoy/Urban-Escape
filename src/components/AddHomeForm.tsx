@@ -71,9 +71,6 @@ function AddHomeForm() {
         return [...prev, file];
       });
     }
-    // if (file) {
-    //   setImage(file);
-    // }
   };
 
   const { mutate: createHome, isPending: isHomeCreating } = useMutation({
@@ -221,7 +218,7 @@ function AddHomeForm() {
                 <FormControl>
                   <Input
                     type="text"
-                    placeholder="Enter your city here"
+                    placeholder="Enter your price here"
                     {...field}
                   />
                 </FormControl>
